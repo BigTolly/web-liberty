@@ -36,13 +36,24 @@ function renderProfiles(state) {
   for (const p of state.profiles) {
     const row = document.createElement('label');
     row.className = 'row';
-    row.innerHTML = `
-      <input type="radio" name="active" value="${p.id}" ${p.id === state.activeId ? 'checked' : ''} />
-      <span class="label"><strong></strong></span>
-      <span class="meta"></span>
-    `;
-    row.querySelector('strong').textContent = p.name;
-    row.querySelector('.meta').textContent = `${p.scheme}://${p.host}:${p.port}`;
+    // Собираем через DOM, а не innerHTML: id может прийти из импортированного JSON.
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'active';
+    radio.value = String(p.id);
+    radio.checked = p.id === state.activeId;
+
+    const label = document.createElement('span');
+    label.className = 'label';
+    const strong = document.createElement('strong');
+    strong.textContent = p.name;
+    label.appendChild(strong);
+
+    const meta = document.createElement('span');
+    meta.className = 'meta';
+    meta.textContent = `${p.scheme}://${p.host}:${p.port}`;
+
+    row.append(radio, label, meta);
     list.appendChild(row);
   }
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Web Liberty — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main>
+    <h1>Web Liberty</h1>
+    <p class="muted">Manage proxy servers and domain filtering rules. Changes are applied immediately.</p>
+
+    <section>
+      <div class="section-head">
+        <h2>Proxy servers</h2>
+        <button id="addProfile" class="btn primary">+ Add server</button>
+      </div>
+      <table class="profiles">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Scheme</th>
+            <th>Host</th>
+            <th>Port</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th title="Click to apply this proxy. Click again to switch to Direct.">Active</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="profileBody"></tbody>
+      </table>
+      <p id="emptyProfiles" class="muted hidden">No proxies configured yet.</p>
+    </section>
+
+    <section>
+      <h2>Domain filter</h2>
+      <div class="filter-modes">
+        <label><input type="radio" name="filterMode" value="off" /> <span><strong>Off</strong> — proxy applies to all sites</span></label>
+        <label><input type="radio" name="filterMode" value="whitelist" /> <span><strong>Whitelist</strong> — proxy applies only to listed domains</span></label>
+        <label><input type="radio" name="filterMode" value="blacklist" /> <span><strong>Blacklist</strong> — proxy applies to all sites <em>except</em> listed</span></label>
+      </div>
+
+      <div class="lists">
+        <div class="list-col">
+          <h3>Whitelist</h3>
+          <textarea id="whitelist" rows="10" placeholder="example.com&#10;*.github.com&#10;*google*"></textarea>
+        </div>
+        <div class="list-col">
+          <h3>Blacklist</h3>
+          <textarea id="blacklist" rows="10" placeholder="banking.com&#10;*.gov"></textarea>
+        </div>
+      </div>
+      <p class="muted">One domain per line. Supports wildcards (<code>*</code>) and bare domains (matches subdomains).</p>
+      <button id="saveLists" class="btn primary">Save filter lists</button>
+      <span id="saveStatus" class="status"></span>
+    </section>
+
+    <section>
+      <h2>Backup</h2>
+      <button id="exportBtn" class="btn">Export config</button>
+      <button id="importBtn" class="btn">Import config</button>
+      <input type="file" id="importFile" accept="application/json" hidden />
+    </section>
+  </main>
+
+  <template id="rowTpl">
+    <tr>
+      <td><input class="name" type="text" placeholder="My proxy" /></td>
+      <td>
+        <select class="scheme">
+          <option value="socks5">socks5</option>
+          <option value="socks4">socks4</option>
+          <option value="http">http</option>
+          <option value="https">https</option>
+        </select>
+      </td>
+      <td><input class="host" type="text" placeholder="127.0.0.1" /></td>
+      <td><input class="port" type="number" min="1" max="65535" placeholder="1080" /></td>
+      <td><input class="username" type="text" placeholder="(optional)" /></td>
+      <td><input class="password" type="password" placeholder="(optional)" /></td>
+      <td><button type="button" class="btn active-btn" data-scheme="socks5">Activate</button></td>
+      <td><button type="button" class="btn danger del">Delete</button></td>
+    </tr>
+  </template>
+
+  <script src="options.js"></script>
+</body>
+</html>
