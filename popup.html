@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Web Liberty</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <h1>Web Liberty</h1>
+    <button id="openOptions" class="link" title="Settings">⚙</button>
+  </div>
+
+  <div id="errBanner" class="err-banner hidden"></div>
+
+  <section class="card">
+    <label class="row">
+      <input type="radio" name="active" value="" id="directRadio" />
+      <span class="label"><strong>Direct</strong> (no proxy)</span>
+    </label>
+    <div id="profileList" class="profile-list"></div>
+    <button id="addProxy" class="add-btn">+ Add proxy</button>
+  </section>
+
+  <section class="card">
+    <div class="section-title">Domain filter</div>
+    <div class="filter-modes">
+      <label class="mode-row">
+        <span><input type="radio" name="filterMode" value="off" /> All websites are allowed.</span>
+      </label>
+      <label class="mode-row">
+        <span><input type="radio" name="filterMode" value="whitelist" /> Whitelist only</span>
+        <button class="mini-btn" data-edit="whitelist">Edit</button>
+      </label>
+      <label class="mode-row">
+        <span><input type="radio" name="filterMode" value="blacklist" /> Blacklist deny</span>
+        <button class="mini-btn" data-edit="blacklist">Edit</button>
+      </label>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span id="status" class="status"></span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
