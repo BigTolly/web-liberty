@@ -58,7 +58,3 @@ The extension works the same way in Chrome and Firefox.
 - `socks5` — in Chrome, DNS may be resolved remotely by the proxy depending on the browser's policy; in Firefox, names are always resolved on the proxy side.
 - `socks4` — auth not supported by SOCKS4.
 - `http` / `https` — username/password are sent automatically when the proxy challenges with `407`.
-
-## Icons
-
-The `icons/` folder of each extension must contain `on16/32/48/128.png` (proxy active) and `off16/32/48/128.png` (Direct). The toolbar icon switches between them automatically based on state.
